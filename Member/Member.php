@@ -1,16 +1,23 @@
 <?php
 
-class Member implements AuthInterface
+namespace Member;
+
+use Vehicle\StartableInterface;
+use Vehicle\{Car,Motorcycle};
+
+class Member extends User implements AuthInterface
 {
     protected static int $count = 0;
 
     protected array $vehicles = [];
 
     public function __construct(
+        string $name,
         protected readonly string $login,
         protected readonly string $password,
         protected int $age
     ) {
+        parent::__construct($name);
         ++static::$count;
     }
 
@@ -34,8 +41,15 @@ class Member implements AuthInterface
         foreach ($this->vehicles as $vehicle) {
             assert($vehicle instanceof StartableInterface);
             $vehicle->start();
+            if ($vehicle instanceof Car) {
+
+            }
         }
-        return $this->login === $login && $this->password === $password;
+        if ($this->login !== $login || $this->password !== $password) {
+            throw new \InvalidArgumentException("Auth failed!");
+        }
+
+        return true;
     }
 
     public function addVehicle(StartableInterface $vehicle): void
@@ -44,6 +58,12 @@ class Member implements AuthInterface
     }
 }
 
-//$member = new Member('Ben', 'pass', 35);
+//$member = new Member('Ben', 'Ben', 'pass', 35);
 //$member = Member::create('Ben', 'admin', 35);
 //echo Member::count() - 2
+
+//try {
+//    $member->auth('Ben', 'admin');
+//} catch (\InvalidArgumentException $e) {
+//    echo $e->getMessage();
+//}

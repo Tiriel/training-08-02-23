@@ -2,6 +2,8 @@
 
 declare(strict_types = 1);
 
+namespace Vehicle;
+
 class Car extends Vehicle implements YearInterface
 {
     private int $year;
@@ -22,7 +24,7 @@ class Car extends Vehicle implements YearInterface
     }
 }
 
-$car = new Car('Renault', 'R5');
+//$car = new Car('Super R5', 'Renault', 'R5');
 //$newCar = new Car('Citroën', 'C5');
 //unset($newCar);
 //$car->brand = 'Mercedes';
