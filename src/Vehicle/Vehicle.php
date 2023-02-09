@@ -2,14 +2,18 @@
 
 namespace Vehicle;
 
+use Member\AuthInterface;
+use Utils\StringableTrait;
+
 abstract class Vehicle implements StartableInterface
 {
-    use \Utils\StringableTrait;
+    use StringableTrait;
 
     public function __construct(
         string $name,
         protected readonly string $brand,
-        protected readonly string $model
+        protected readonly string $model,
+        protected readonly AuthInterface $user
     ) {
         $this->name = $name;
     }

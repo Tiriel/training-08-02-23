@@ -41,9 +41,6 @@ class Member extends User implements AuthInterface
         foreach ($this->vehicles as $vehicle) {
             assert($vehicle instanceof StartableInterface);
             $vehicle->start();
-            if ($vehicle instanceof Car) {
-
-            }
         }
         if ($this->login !== $login || $this->password !== $password) {
             throw new \InvalidArgumentException("Auth failed!");
