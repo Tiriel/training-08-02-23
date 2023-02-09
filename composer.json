@@ -1,0 +1,17 @@
+{
+    "name": "benjamin/training-08-02-23",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Benjamin Zaslavsky",
+            "email": "benjamin.zaslavsky@gmail.com"
+        }
+    ],
+    "require": {}
+}
