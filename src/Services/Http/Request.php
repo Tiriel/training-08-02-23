@@ -6,6 +6,7 @@ class Request
 {
     protected string $path;
     protected string $method;
+    protected array $attributes = [];
     protected array $query = [];
     protected array $post = [];
     protected array $headers = [];
@@ -37,6 +38,16 @@ class Request
     public function getMethod(): string
     {
         return $this->method;
+    }
+
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    public function setAttributes(array $attributes): void
+    {
+        $this->attributes = $attributes;
     }
 
     public function getQuery(): array

@@ -59,4 +59,9 @@ class MemberTest extends TestCase
 
         $bool = $member->auth('Tom', 'pass');
     }
+
+    public static function tearDownAfterClass(): void
+    {
+        static::$instances = [];
+    }
 }

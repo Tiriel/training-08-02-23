@@ -22,6 +22,11 @@ class Subject
         }
     }
 
+    public function getObservers(): array
+    {
+        return $this->observers;
+    }
+
     public function notifyObservers(mixed &$data): void
     {
         foreach ($this->observers as $observer) {
