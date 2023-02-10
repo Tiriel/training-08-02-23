@@ -12,7 +12,7 @@ class Route
         private readonly string $path,
         private readonly ?array $requirements = null,
         private readonly ?array $defaults = null,
-        private readonly ?array $methods = null
+        private readonly array $methods = ['GET']
     ) {
         [$this->controller, $this->action] = explode('_', $this->name, 2);
     }
@@ -47,7 +47,7 @@ class Route
         return $this->defaults;
     }
 
-    public function getMethods(): ?array
+    public function getMethods(): array
     {
         return $this->methods;
     }

@@ -2,13 +2,18 @@
 
 namespace Services\Routing\Exception;
 
-use HttpException;
-use Throwable;
+use Services\Routing\Route;
 
 class BadMethodHttpException extends HttpException
 {
-    public function __construct(string $message = "", int $code = 405, ?Throwable $previous = null)
+    public function __construct(Route $route)
     {
-        parent::__construct($message, $code, $previous);
+        $message = sprintf(
+            "Wrong method for request %s (accepted : [%s])",
+            $route->getPath(),
+            implode(', ', $route->getMethods())
+        );
+
+        parent::__construct($message, 405);
     }
 }

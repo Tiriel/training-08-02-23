@@ -4,6 +4,10 @@ namespace App;
 
 use Services\Http\Request;
 use Services\Http\Response;
+use Services\Routing\Exception\BadMethodHttpException;
+use Services\Routing\Exception\HttpException;
+use Services\Routing\Exception\NotFoundHttpException;
+use Services\Routing\Route;
 use Services\Routing\Router;
 use Twig\Environment;
 
@@ -21,15 +25,26 @@ class Blog
     public function handle(Request $request): Response
     {
         $router = $this->container->get(Router::class);
+
         /** @var Router $router */
         $route = $router->route($request);
-        if ('' === $controller = $this->container->get($route->getController())) {
-            throw match ($route->getName()) {};
+        if ('error' === $controller = $route->getController()) {
+            $this->throwHttpException($route);
         }
 
-        $response = $controller(...$request->getAttributes());
+        $controller = $this->container->getController($controller);
+        $action = $route->getAction();
 
-        // return $response;
-        return new Response();
+
+        return $controller->$action(...$request->getAttributes());
+    }
+
+    private function throwHttpException(Route $route): void
+    {
+        throw match ($route->getName()) {
+            'error_bad_method' => new BadMethodHttpException($route),
+            'error_not_found' => new NotFoundHttpException($route),
+            default => new HttpException()
+        };
     }
 }

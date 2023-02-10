@@ -2,13 +2,14 @@
 
 namespace Services\Routing\Exception;
 
-use HttpException;
-use Throwable;
+use Services\Routing\Route;
 
 class NotFoundHttpException extends HttpException
 {
-    public function __construct(string $message = "", int $code = 404, ?Throwable $previous = null)
+    public function __construct(Route $route)
     {
-        parent::__construct($message, $code, $previous);
+        $message = sprintf("The requested url %s does not exist.", $route->getPath());
+
+        parent::__construct($message, 404);
     }
 }

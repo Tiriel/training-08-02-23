@@ -4,7 +4,7 @@ namespace Config;
 
 use Services\Routing\Route;
 
-class Routes
+class Routes implements ConfigInterface
 {
     public static function get(): array
     {
@@ -17,20 +17,20 @@ class Routes
                 'main_contact',
                 '/contact',
             ),
-            new Route(
-                'post_list',
-                '/posts',
-            ),
-            new Route(
-                'post_new',
-                '/posts/new',
-                methods: ['GET', 'POST']
-            ),
-            new Route(
-                'post_show',
-                '/posts/{slug}',
-                requirements: ['slug' => '\w+']
-            ),
+            //new Route(
+            //    'post_list',
+            //    '/posts',
+            //),
+            //new Route(
+            //    'post_new',
+            //    '/posts/new',
+            //    methods: ['GET', 'POST']
+            //),
+            //new Route(
+            //    'post_show',
+            //    '/posts/{slug}',
+            //    requirements: ['slug' => '\w+']
+            //),
         ];
     }
 }

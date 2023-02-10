@@ -21,13 +21,16 @@ class Router
             }
 
             if (!\in_array($request->getMethod(), $route->getMethods())) {
-                return new Route('error_bad_method', '/405');
+                return new Route('error_bad_method',
+                    $request->getMethod() . " - " . $request->getPath(),
+                    methods: $route->getMethods()
+                );
             }
 
             return $route;
         }
 
-        return new Route('error_not_found', '/404');
+        return new Route('error_not_found', $request->getPath());
     }
 
     public function match(Request $request, Route $route): bool
