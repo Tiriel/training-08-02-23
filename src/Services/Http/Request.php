@@ -70,8 +70,13 @@ class Request
         return $this->server;
     }
 
-    public static function create(): static
+    public static function create($get, $post, $server): static
     {
-        return new static($_GET, $_POST, $_SERVER);
+        return new static($get, $post, $server);
+    }
+
+    public static function createFromGlobals(): static
+    {
+        return static::create($_GET, $_POST, $_SERVER);
     }
 }

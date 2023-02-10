@@ -52,7 +52,7 @@ class Router
         $requirements =$route->getRequirements();
 
         $regex = preg_replace_callback(
-            '#{(\w+)}#',
+            '#{(\w++)}#',
             function ($matches) use ($requirements) {
                 $req = $requirements[$matches[1]] ?? '.*';
 

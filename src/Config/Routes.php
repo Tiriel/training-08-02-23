@@ -29,7 +29,7 @@ class Routes implements ConfigInterface
             //new Route(
             //    'post_show',
             //    '/posts/{slug}',
-            //    requirements: ['slug' => '\w+']
+            //    requirements: ['slug' => '.+']
             //),
         ];
     }
