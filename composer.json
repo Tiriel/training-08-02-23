@@ -4,7 +4,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "": "src/",
+            "Tests\\": "tests/"
         }
     },
     "authors": [
@@ -15,5 +16,8 @@
     ],
     "require": {
         "twig/twig": "^3.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
     }
 }

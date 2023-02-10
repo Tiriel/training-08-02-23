@@ -27,6 +27,11 @@ class Member extends User implements AuthInterface
 
     public static function create(array $data): static
     {
+        $keys = ['name', 'login', 'password', 'age'];
+        if (empty($data) || 0 !== count(array_diff($keys, array_keys($data)))) {
+            throw new \InvalidArgumentException("You need all the proper keys.");
+        }
+
         ['name' => $name, 'login' => $login, 'password' => $password, 'age' => $age] = $data;
 
         return new static($name, $login, $password, $age);
